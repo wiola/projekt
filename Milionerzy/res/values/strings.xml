@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Milionerzy</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="zacznij_gre">Zacznij grę!</string>
+    <string name="pomoc">Pomoc</string>
+    <string name="info">Info</string>
+    <string name="wyjscie">Wyjście</string>
+    <string name="title_activity_powitanie">Powitanie</string>
+    <string name="powitanie">Witaj w grze</string>
+    <string name="powitanie1">Milionerzy</string>
+    <string name="powitanie2">Sprawdź stan swojej wiedzy w kilku kategoriach</string>
+    <string name="title_activity_pomoc">Pomoc</string>
+    <string name="pomoc1">to gra, dzięki której możesz sprawdzić stan swojej wiedzy w kilku kategoriach tematycznych.</string>
+    <string name="pomoc2">Odpowiadasz na 15 pytań z czego po 5ciu pytaniach ich poziom trudności wzrasta.</string>
+    <string name="pomoc3">Masz 4 podpowiedzi, z czego tylko jedna jest prawidłowa.</string>
+    <string name="pomoc4">Masz także 3 koła ratunkowe, z których w każdej chwili możesz skorzytsać.</string>
+    <string name="pomoc5">Po każdym pytaniu możesz zrezygnować z dalszego grania i zatrzymać dotychczasową pulę punktów, którą zdobyłeś.</string>
+    <string name="pomoc6">Jeżeli jednak tego nie zrobisz a nie odpowiedz na kolejne pytanie tracisz wszystkie punkty.</string>
+    <string name="pomoc7">Gra może odbywać się na czas bądź bez. Im szybciej odpowiesz tym więcej punktów zdobywasz.</string>
+    <string name="title_activity_info">Info</string>
+
+</resources>
