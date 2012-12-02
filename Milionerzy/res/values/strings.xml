@@ -21,5 +21,8 @@
     <string name="pomoc6">Jeżeli jednak tego nie zrobisz a nie odpowiedz na kolejne pytanie tracisz wszystkie punkty.</string>
     <string name="pomoc7">Gra może odbywać się na czas bądź bez. Im szybciej odpowiesz tym więcej punktów zdobywasz.</string>
     <string name="title_activity_info">Info</string>
+    <string name="podaj_nick">Podaj nick:</string>
+    <string name="ok">Ok</string>
+    <string name="wroc">Wróć</string>
 
 </resources>

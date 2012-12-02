@@ -32,7 +32,6 @@ public class Powitanie extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-	
 		getMenuInflater().inflate(R.menu.activity_powitanie, menu);
 		return true;
 	}
@@ -41,7 +40,6 @@ public class Powitanie extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.addToDictionary:
-		
 			NavUtils.navigateUpFromSameTask(this);
 			return true;
 		}

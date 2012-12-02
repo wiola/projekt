@@ -1,20 +1,23 @@
+
 package com.example.milionerzy;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class Milionerzy extends Activity {
+	
+	EditText nazwaUzytkownika;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,17 +25,39 @@ public class Milionerzy extends Activity {
 		setContentView(R.layout.activity_menu);
 		
 		
+		
 		Button button1 = (Button) findViewById(R.id.button1);
 		
 		final Context context = this;
 		
 		button1.setOnClickListener(new OnClickListener() {
+			
+			
 
 			@Override
 			public void onClick(View arg0) {
-				AlertDialog.Builder tAlert = new AlertDialog.Builder(context);
-				
-				Dialog cos = 
+				AlertDialog.Builder tAlertu = new AlertDialog.Builder(context);
+			    LayoutInflater inflater = getLayoutInflater();
+			    
+			    nazwaUzytkownika   = (EditText)findViewById(R.id.username);
+
+			    tAlertu.setView(inflater.inflate(R.layout.imie, null))
+			           .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+			               @Override
+			               public void onClick(DialogInterface dialog, int id) {
+			            	   nazwaUzytkownika.getText();
+			            	   dialog.cancel();
+			               }
+			           })
+			           .setNegativeButton(R.string.wroc, new DialogInterface.OnClickListener() {
+			               public void onClick(DialogInterface dialog, int id) {
+			                   dialog.cancel();
+			               }
+			           });
+			    
+			    AlertDialog alert = tAlertu.create();
+
+				alert.show();
 				
 			}
 		});	
@@ -119,7 +144,6 @@ public class Milionerzy extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_menu, menu);
 		return true;
 	}
