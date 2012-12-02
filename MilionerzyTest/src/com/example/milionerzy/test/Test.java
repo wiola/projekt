@@ -1,8 +1,8 @@
 package com.example.milionerzy.test;
 
 import android.test.ActivityInstrumentationTestCase2;
-import com.jayway.android.robotium.solo.Solo;
 import com.example.milionerzy.Milionerzy;
+import com.jayway.android.robotium.solo.Solo;
 
 public class Test extends ActivityInstrumentationTestCase2<Milionerzy> {
 	private Solo solo;
@@ -47,6 +47,14 @@ public class Test extends ActivityInstrumentationTestCase2<Milionerzy> {
 		solo.clickOnButton("Wyjście");
 		solo.clickOnButton("Tak");
 		solo.finishOpenedActivities();
+
+	}
+	
+	public void testWpisywania() {
+		
+		solo.clickOnButton("Zacznij grę!");
+        solo.enterText(0, "robotium");
+        solo.finishOpenedActivities();
 
 	}
 	
