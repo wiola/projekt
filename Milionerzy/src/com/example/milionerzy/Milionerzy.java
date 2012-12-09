@@ -52,6 +52,7 @@ public class Milionerzy extends Activity {
 								tAlertu2.setTitle("Z jakiej kategorii chcesz odpowiadać?");
 								tAlertu2.setSingleChoiceItems(
 										StanGry.kategorie, 0,
+
 										new DialogInterface.OnClickListener() {
 											public void onClick(
 													DialogInterface dialog,
@@ -60,20 +61,74 @@ public class Milionerzy extends Activity {
 											}
 										});
 
-								tAlertu2.setPositiveButton("OK",
+								tAlertu2.setPositiveButton(R.string.ok,
 										new DialogInterface.OnClickListener() {
+
+											@Override
 											public void onClick(
-													DialogInterface dialog,
-													int id) {
-												if (StanGry.kategoria != -1) {
-													Toast.makeText(
-															context,
-															StanGry.kategorie[StanGry.kategoria],
-															Toast.LENGTH_SHORT)
-															.show();
-												}
+
+											DialogInterface dialog, int id) {
+												Toast.makeText(
+
+														context,
+														StanGry.kategorie[StanGry.kategoria],
+														Toast.LENGTH_SHORT)
+														.show();
+
+												AlertDialog.Builder tAlertu3 = new AlertDialog.Builder(
+														context);
+												tAlertu3.setTitle("Chcesz grać na czas?");
+												tAlertu3.setSingleChoiceItems(
+														StanGry.czas,
+														0,
+														new DialogInterface.OnClickListener() {
+															public void onClick(
+																	DialogInterface dialog,
+																	int item) {
+																StanGry.wybor = item;
+															}
+														});
+
+												tAlertu3.setPositiveButton(
+														R.string.ok,
+														new DialogInterface.OnClickListener() {
+
+															@Override
+															public void onClick(
+																	DialogInterface dialog,
+																	int id) {
+
+																Toast.makeText(
+																		context,
+																		StanGry.czas[StanGry.wybor],
+																		Toast.LENGTH_SHORT)
+																		.show();
+																dialog.cancel();
+
+															}
+
+														});
+												tAlertu3.setNegativeButton(
+														"Wróć", // NEGATYWNY
+																// PRZYCISK
+														new DialogInterface.OnClickListener() {
+															public void onClick(
+																	DialogInterface dialog,
+																	int id) {
+																dialog.cancel();
+
+															}
+														});
+												AlertDialog alert = tAlertu3
+														.create(); // STWORZENIE
+
+												alert.show();
+
+												dialog.cancel();
 											}
+
 										});
+
 								tAlertu2.setNegativeButton("Wróć",
 										new DialogInterface.OnClickListener() {
 											public void onClick(
