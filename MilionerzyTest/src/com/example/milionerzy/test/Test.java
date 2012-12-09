@@ -30,8 +30,8 @@ public class Test extends ActivityInstrumentationTestCase2<Milionerzy> {
 	}
 
 	public void testPomoc() {
-	    solo.clickOnButton("Pomoc");
-	    solo.finishOpenedActivities();
+	    	solo.clickOnButton("Pomoc");
+	    	solo.finishOpenedActivities();
 	}
 
 
@@ -53,8 +53,8 @@ public class Test extends ActivityInstrumentationTestCase2<Milionerzy> {
 	public void testWpisywania() {
 		
 		solo.clickOnButton("Zacznij grę!");
-        solo.enterText(0, "robotium");
-        solo.finishOpenedActivities();
+        	solo.enterText(0, "robotium");
+        	solo.finishOpenedActivities();
 
 	}
 	
