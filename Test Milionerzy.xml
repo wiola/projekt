@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testrun name="Test" project="MilionerzyTest" tests="23" started="23" failures="0" errors="0" ignored="0">
+  <testsuite name="test [emulator-5554]" time="114.136">
+    <testsuite name="com.example.milionerzy.test.Test" time="114.136">
+      <testcase name="testAnulowanieWyjscia " classname="com.example.milionerzy.test.Test" time="0.0"/>
+      <testcase name="testPomoc " classname="com.example.milionerzy.test.Test" time="0.0"/>
+      <testcase name="testPrzejsciaDalej " classname="com.example.milionerzy.test.Test" time="0.0"/>
+      <testcase name="testPrzejsciaDalejzCzasu " classname="com.example.milionerzy.test.Test" time="0.0"/>
+      <testcase name="testTekstuBiologia " classname="com.example.milionerzy.test.Test" time="0.0"/>
+      <testcase name="testTekstuCzasNie " classname="com.example.milionerzy.test.Test" time="4.877"/>
+      <testcase name="testTekstuCzasTak " classname="com.example.milionerzy.test.Test" time="9.619"/>
+      <testcase name="testTekstuFizyka " classname="com.example.milionerzy.test.Test" time="8.44"/>
+      <testcase name="testTekstuHistoria " classname="com.example.milionerzy.test.Test" time="9.123"/>
+      <testcase name="testTekstuMatematyka " classname="com.example.milionerzy.test.Test" time="8.638"/>
+      <testcase name="testTekstuNick " classname="com.example.milionerzy.test.Test" time="5.447"/>
+      <testcase name="testWpisywania " classname="com.example.milionerzy.test.Test" time="3.29"/>
+      <testcase name="testWroc " classname="com.example.milionerzy.test.Test" time="3.215"/>
+      <testcase name="testWyboruCzasNie " classname="com.example.milionerzy.test.Test" time="6.454"/>
+      <testcase name="testWyboruCzasTak " classname="com.example.milionerzy.test.Test" time="7.057"/>
+      <testcase name="testWyboruKategoriBiologia " classname="com.example.milionerzy.test.Test" time="6.856"/>
+      <testcase name="testWyboruKategoriFizyka " classname="com.example.milionerzy.test.Test" time="6.504"/>
+      <testcase name="testWyboruKategoriHistoria " classname="com.example.milionerzy.test.Test" time="6.481"/>
+      <testcase name="testWyboruKategoriMatematyka " classname="com.example.milionerzy.test.Test" time="7.784"/>
+      <testcase name="testWyboruPowrot " classname="com.example.milionerzy.test.Test" time="5.75"/>
+      <testcase name="testWyjscia " classname="com.example.milionerzy.test.Test" time="4.195"/>
+      <testcase name="testWyjsciaInfo " classname="com.example.milionerzy.test.Test" time="4.044"/>
+      <testcase name="testWyjsciazCzasu " classname="com.example.milionerzy.test.Test" time="6.361"/>
+    </testsuite>
+  </testsuite>
+</testrun>
