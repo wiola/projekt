@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
-
 public class Pomoc extends Activity {
 
 	@Override
@@ -19,10 +18,5 @@ public class Pomoc extends Activity {
 		getMenuInflater().inflate(R.menu.activity_pomoc, menu);
 		return true;
 	}
-
-
-	
-	
-	
 
 }
