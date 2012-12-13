@@ -73,9 +73,33 @@ public class Milionerzy extends Activity {
 							public void onClick(DialogInterface dialog, int id) {
 							
 							Toast.makeText(context,StanGry.czas[StanGry.wybor],Toast.LENGTH_SHORT).show();
-							dialog.cancel();
+							
+							
+							if(StanGry.wybor==0)
+							{
+								
+							    
+							    AlertDialog.Builder tAlertu4 = new AlertDialog.Builder(context);
+							    
+							    tAlertu4.setMessage("Pamiętaj, że im szybszy czas odpowiedzi tym więcej punktów do zdobycia")
+								.setCancelable(false)
+								.setNegativeButton("Wróć", new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog, int id) {
+									    dialog.cancel();
+									}
+								    });
+							    
+
+							    AlertDialog alert = tAlertu4.create();
+							    alert.show();
+								
+							}
 						    }
-						});
+						    });
+						    
+						    
+						    
+					    
 
 
 					    tAlertu3.setNegativeButton("Wróć",new DialogInterface.OnClickListener() {
@@ -95,6 +119,7 @@ public class Milionerzy extends Activity {
 				tAlertu2.setNegativeButton("Wróć", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog,int id) {
 					    dialog.cancel();
+					    
 					}
 				    });
 				
