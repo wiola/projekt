@@ -4,6 +4,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Random;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -11,6 +12,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.widget.RadioButton;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
@@ -129,27 +131,45 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 	}
 
 	void zwrocPytanie() {
+		
+		
 		Cursor cursor = getReadableDatabase().rawQuery(
-				"SELECT Pytanie, _id FROM Pytania WHERE IDKategori = ?",
-				new String[] { Integer.toString(StanGry.kategoria) });
-		Cursor cursor2;
-		Odpowiedz[] odpowiedzi = new Odpowiedz[4];
-
+				"SELECT *, _id FROM Pytania", null);
+		Cursor cursor2 = getReadableDatabase().rawQuery(
+				"SELECT *, _id FROM Odpowiedzi", null);
+		
+		//Pyt[] pytania = new Pyt[60];
+		//Odp[] odp = new Odp[240];
+		
 		for (int i = 0; cursor.moveToNext(); ++i) {
-			cursor2 = getReadableDatabase()
-					.rawQuery(
-							"SELECT Prawda, Odpowiedzi FROM Odpowiedzi WHERE IDPytanie = ?",
-							new String[] { cursor.getString(cursor
-									.getColumnIndex("_id")) });
-			for (int j = 0; cursor2.moveToNext(); ++j) {
-				odpowiedzi[j] = new Odpowiedz(cursor2.getString(cursor2
-						.getColumnIndex("Odpowiedzi")),
-						Integer.parseInt(cursor2.getString(cursor2
-								.getColumnIndex("Prawda"))));
-			}
-			StanGry.pytania[i] = new Pytanie(cursor.getString(cursor
-					.getColumnIndex("Pytanie")), odpowiedzi);
+			StanGry.pytania[i] = new Pyt(cursor.getString(cursor.getColumnIndex("idPytanie")), cursor.getInt(cursor.getColumnIndex("IDKategori")), cursor.getString(cursor.getColumnIndex("Pytanie")));
 		}
+		
+		for (int i = 0; cursor2.moveToNext(); ++i) {
+			StanGry.odp[i] = new Odp(cursor2.getString(cursor2.getColumnIndex("IDPytanie")), cursor2.getString(cursor2.getColumnIndex("Odpowiedzi")), cursor2.getInt(cursor2.getColumnIndex("Prawda")));
+		}
+		
+		/*Odp[] tmp = new Odp[4];
+		int k;
+		
+		for(int i=0; i<60; ++i) {
+			k=0;
+			for(int j=0; j<240; ++j)
+			{
+				//Log.e("CHUJ", Integer.toString(pytania[i]._id)+" "+Integer.toString(odp[j].idPytania));
+					if(pytania[i]._id==odp[j].idPytania)
+				{
+					tmp[k]=odp[j];
+					++k;
+					if(k==4)
+					{
+						break;
+					}
+				}
+			}
+			//Log.e("CHUJ", pytania[i].pytanie+" "+tmp[0].odpowiedz+" "+tmp[1].odpowiedz);
+			StanGry.pytania[i] = new PytaniaIOdpowiedzi(pytania[i], tmp);
+		}*/
 	}
 
 }

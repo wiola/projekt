@@ -5,7 +5,7 @@
     tools:context=".StartGry" >
     
         <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/pytanie"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -59,7 +59,7 @@
 
     <Button
         android:id="@+id/button1"
-        android:layout_width="80dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/odpowiedzi"
         android:layout_toLeftOf="@+id/Timer"

@@ -2,16 +2,18 @@ package com.example.milionerzy;
 
 
 class Pytanie {
-	public Odpowiedz[] odpowiedzi = new Odpowiedz[4];
+	public Odpowiedz[] odpowiedzi;// = new Odpowiedz[4];
 	public String pyt;
+	public int id;
 	
-	public Pytanie(String pyt, Odpowiedz[] odpowiedzi)
+	public Pytanie(String pyt, int id)//Odpowiedz[] odpowiedzi)
 	{
 		this.pyt=pyt;
-		this.odpowiedzi=odpowiedzi;
+		this.id=id;
+		//this.odpowiedzi=odpowiedzi;
 	}
 	
-	static String poprawna(Pytanie p)
+	/*static String poprawna(Pytanie p)
 	{
 		for(int h=0; h<4; ++h)
 		{
@@ -21,6 +23,6 @@ class Pytanie {
 			}
 		}
 		return null;
-	}
+	}*/
 
 }

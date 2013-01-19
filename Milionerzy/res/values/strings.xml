@@ -24,5 +24,6 @@
     <string name="podaj_nick">Podaj nick:</string>
     <string name="ok">OK</string>
     <string name="wroc">Wróć</string>
+    <string name="title_activity_start_gry">StartGry</string>
 
 </resources>

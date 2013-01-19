@@ -1,16 +1,19 @@
 package com.example.milionerzy;
 
 import java.io.IOException;
+import java.util.Random;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -55,29 +58,63 @@ public class StartGry extends Activity {
 		 
 		 
 		 
-		 TextView pytanie = (TextView) findViewById(R.id.textView1);
+		 TextView pytanie = (TextView) findViewById(R.id.pytanie);
 		 myDbHelper.zwrocPytanie();
-		 pytanie.setText(StanGry.pytania[0].pyt);
+		 int[] tablicaPytan = StanGry.wybierzPytaniaZKategori(StanGry.kategoria);
+		 
+		 Random rand = new Random();
+		 
+		 int nr = tablicaPytan[rand.nextInt(15)];
+		 StanGry.nr = nr;
+		 
+		 pytanie.setText(StanGry.pytania[nr].pytanie);
 		 
 		 final RadioGroup odpowiedzi = (RadioGroup) findViewById(R.id.odpowiedzi);
 		 
+			int k=0;
+			Odp[] tmp = new Odp[4];
+			for(int j=0; j<240; ++j)
+			{
+				if(StanGry.pytania[nr]._id==StanGry.odp[j].idPytania)
+				{
+					tmp[k]=StanGry.odp[j];
+					++k;
+					if(k==4)
+					{
+						break;
+					}
+				}
+			}
+			
+			for(int i=0; i<4; ++i)
+			{
+				if(tmp[i].prawda==1)
+				{
+					StanGry.prawidlowa=tmp[i].odpowiedz;
+				}
+			}
+		 
+		 //Log.e("CHUJ", Integer.toString(nr)+": "+Integer.toString(StanGry.pytania[nr].odpowiedzi[0].idPytania));
+		 
 		 RadioButton rb1 = (RadioButton) findViewById(R.id.radioButton1);
-		 rb1.setText(StanGry.pytania[0].odpowiedzi[0].odp);
+		 rb1.setText(tmp[0].odpowiedz);
 		 //rb1.setBackgroundColor(Color.MAGENTA);
 		 RadioButton rb2 = (RadioButton) findViewById(R.id.radioButton2);
-		 rb2.setText(StanGry.pytania[0].odpowiedzi[1].odp);
+		 rb2.setText(tmp[1].odpowiedz);
 		 RadioButton rb3 = (RadioButton) findViewById(R.id.radioButton3);
-		 rb3.setText(StanGry.pytania[0].odpowiedzi[2].odp);
+		 rb3.setText(tmp[2].odpowiedz);
 		 RadioButton rb4 = (RadioButton) findViewById(R.id.radioButton4);
-		 rb4.setText(StanGry.pytania[0].odpowiedzi[3].odp);
+		 rb4.setText(tmp[3].odpowiedz);
 			Button button1 = (Button) findViewById(R.id.button1);
 			
-			TextView zegar = (TextView) findViewById(R.id.Timer);
-			final Zegar z = new Zegar(zegar);
-			z.startTimer();
+			if(StanGry.wybor==0)
+				{
+				TextView zegar = (TextView) findViewById(R.id.Timer);
+				final Zegar z = new Zegar(zegar);
+				z.startTimer();
 		 
 			button1.setOnClickListener(new OnClickListener() {
-		 
+				
 				@Override
 				public void onClick(View v) {
 					z.stopTimer();
@@ -85,8 +122,10 @@ public class StartGry extends Activity {
 					int selectedId = odpowiedzi.getCheckedRadioButtonId();
 		 
 					RadioButton rb = (RadioButton) findViewById(selectedId);
-					if(rb.getText().toString().compareTo(Pytanie.poprawna(StanGry.pytania[0]))==0)
+					//if((rb.getText().toString()).compareTo(PytaniaIOdpowiedzi.poprawna(StanGry.nr))==0)
+					if((rb.getText().toString()).compareTo(StanGry.prawidlowa)==0)
 					{
+						rb.setBackgroundColor(Color.GREEN);
 						if(z.czas()<=5)
 						{
 							StanGry.punkty+=PRAWIDLOWA*10;
@@ -99,29 +138,137 @@ public class StartGry extends Activity {
 						{
 							StanGry.punkty+=PRAWIDLOWA;
 						}
+						
+						AlertDialog.Builder tAlertu = new AlertDialog.Builder(context);
+					    
+						tAlertu.setTitle("Zdobyte punkty: ");
+					    tAlertu.setMessage(Integer.toString(StanGry.punkty))
+						.setCancelable(false)
+						.setPositiveButton("Dalej", new DialogInterface.OnClickListener() {
+										    
+										    public void onClick(DialogInterface dialog, int id) {
+											final Intent mainIntent = new Intent(StartGry.this, StartGry.class);
+											StartGry.this.startActivity(mainIntent);
+											StartGry.this.finish();
+										    }
+										})
+						.setNegativeButton("Koniec", new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
+							    dialog.cancel();
+							    StartGry.this.finish();
+							}
+						    });
+					    
+
+					    AlertDialog alert = tAlertu.create();
+					    alert.show();
+			 
 					}
 					else
 					{
 						StanGry.punkty=NIEPRAWIDLOWA;
-					}
-					
-					AlertDialog.Builder tAlertu = new AlertDialog.Builder(context);
-				    
-				    tAlertu.setMessage(Integer.toString(StanGry.punkty))
-					.setCancelable(false)
-					.setNegativeButton("Wróć", new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int id) {
-						    dialog.cancel();
+						rb.setBackgroundColor(Color.RED);
+						
+						RadioButton[] rbp = {(RadioButton) findViewById(R.id.radioButton1), (RadioButton) findViewById(R.id.radioButton2), (RadioButton) findViewById(R.id.radioButton3), (RadioButton) findViewById(R.id.radioButton4)};
+						for(int i=0; i<4; ++i)
+						{
+							if((rbp[i].getText().toString()).compareTo(StanGry.prawidlowa)==0) {
+								rbp[i].setBackgroundColor(Color.GREEN);
+							}
 						}
-					    });
-				    
+						
+						AlertDialog.Builder tAlertu = new AlertDialog.Builder(context);
+					    
+						tAlertu.setTitle("Zdobyte punkty: ");
+					    tAlertu.setMessage(Integer.toString(StanGry.punkty))
+						.setCancelable(false)
+						.setNegativeButton("Koniec", new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
+							    dialog.cancel();
+							    StartGry.this.finish();
+							}
+						    });
+					    
 
-				    AlertDialog alert = tAlertu.create();
-				    alert.show();
-		 
+					    AlertDialog alert = tAlertu.create();
+					    alert.show();
+					}
 				}
 		 
 			});
+				} ///TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+			else
+			{
+				button1.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {			 
+						int selectedId = odpowiedzi.getCheckedRadioButtonId();
+			 
+						RadioButton rb = (RadioButton) findViewById(selectedId);
+												if((rb.getText().toString()).compareTo(StanGry.prawidlowa)==0)
+						{
+							rb.setBackgroundColor(Color.GREEN);
+								StanGry.punkty+=PRAWIDLOWA;
+								
+								AlertDialog.Builder tAlertu = new AlertDialog.Builder(context);
+							    
+								tAlertu.setTitle("Zdobyte punkty: ");
+							    tAlertu.setMessage(Integer.toString(StanGry.punkty))
+								.setCancelable(false)
+								.setPositiveButton("Dalej", new DialogInterface.OnClickListener() {
+												    
+												    public void onClick(DialogInterface dialog, int id) {
+													final Intent mainIntent = new Intent(StartGry.this, StartGry.class);
+													StartGry.this.startActivity(mainIntent);
+													StartGry.this.finish();
+												    }
+												})
+								.setNegativeButton("Koniec", new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog, int id) {
+									    dialog.cancel();
+									    StartGry.this.finish();
+									}
+								    });
+							    
+
+							    AlertDialog alert = tAlertu.create();
+							    alert.show();
+						}
+						else
+						{
+							StanGry.punkty=NIEPRAWIDLOWA;
+							rb.setBackgroundColor(Color.RED);
+							
+							RadioButton[] rbp = {(RadioButton) findViewById(R.id.radioButton1), (RadioButton) findViewById(R.id.radioButton2), (RadioButton) findViewById(R.id.radioButton3), (RadioButton) findViewById(R.id.radioButton4)};
+							for(int i=0; i<4; ++i)
+							{
+								if((rbp[i].getText().toString()).compareTo(StanGry.prawidlowa)==0) {
+									rbp[i].setBackgroundColor(Color.GREEN);
+								}
+							}
+							
+							AlertDialog.Builder tAlertu = new AlertDialog.Builder(context);
+						    
+							tAlertu.setTitle("Zdobyte punkty: ");
+						    tAlertu.setMessage(Integer.toString(StanGry.punkty))
+							.setCancelable(false)
+							.setNegativeButton("Koniec", new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog, int id) {
+								    dialog.cancel();
+								    StartGry.this.finish();
+								}
+							    });
+						    
+
+						    AlertDialog alert = tAlertu.create();
+						    alert.show();
+						}
+			 
+					}
+			 
+				});
+			}
 
 	}
 
