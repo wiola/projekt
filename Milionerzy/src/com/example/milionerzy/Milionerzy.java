@@ -43,6 +43,7 @@ public class Milionerzy extends Activity {
 				public void onClick(DialogInterface dialog, int id) {
 				StanGry.nazwaUzytkownika = input.getText().toString();
 				String powitanie = "Witaj "+ StanGry.nazwaUzytkownika + "!";
+				StanGry.zeruj();
 				
 				Toast.makeText(getApplicationContext(), powitanie, Toast.LENGTH_LONG).show();
 				

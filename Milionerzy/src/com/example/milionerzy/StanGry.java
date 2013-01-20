@@ -13,6 +13,13 @@ class StanGry {
 	//public static PytaniaIOdpowiedzi[] pytania = new PytaniaIOdpowiedzi[60];
 	public static int nr;
 	public static String prawidlowa;
+	public static int iloscPytan = 0;
+	public static volatile int slot = 0;
+	public static int[] nieaktualnePytania = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+	public static int KoloRatunkowe = 0;
+	public final static String[] KolaRatunkowe = {"Telefon do przyjaciela", "Pytanie do publiczności", "50/50" };
+	public static Odp[] aktualneOdpowiedzi;
+	public static boolean wykorzystaneKola[] = new boolean[3];
 	
 	public static int[] wybierzPytaniaZKategori(int id)
 	{
@@ -38,4 +45,18 @@ class StanGry {
 		return p[nr];
 	}
 	
+	public static void zeruj() {
+		punkty=0;
+		iloscPytan=0;
+		
+		for(int i=0; i<15; ++i)
+		{
+			nieaktualnePytania[i]=-1;
+		}
+		
+		for(int i=0; i<3; ++i)
+		{
+			wykorzystaneKola[i]=false;
+		}
+	}
 }

@@ -6,14 +6,17 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Random;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.provider.SyncStateContract.Columns;
 import android.util.Log;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
 
@@ -149,6 +152,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 			StanGry.odp[i] = new Odp(cursor2.getString(cursor2.getColumnIndex("IDPytanie")), cursor2.getString(cursor2.getColumnIndex("Odpowiedzi")), cursor2.getInt(cursor2.getColumnIndex("Prawda")));
 		}
 		
+		cursor.close();
+		cursor2.close();
+		
 		/*Odp[] tmp = new Odp[4];
 		int k;
 		
@@ -170,6 +176,50 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 			//Log.e("CHUJ", pytania[i].pytanie+" "+tmp[0].odpowiedz+" "+tmp[1].odpowiedz);
 			StanGry.pytania[i] = new PytaniaIOdpowiedzi(pytania[i], tmp);
 		}*/
+	}
+	
+	void usun(String tabela, String kolumna, String warunek) {
+		//try {
+			//getWritableDatabase().delete(tabela, kolumna, warunek);
+		getWritableDatabase().execSQL("DELETE FROM "+tabela+" WHERE nr = "+ warunek);
+		//getWritableDatabase().rawQuery("DELETE FROM "+tabela+" WHERE nr = ", warunek);
+		//}
+		//catch(SQLiteException e)
+		//{
+		//	Log.e("CHUJ", "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
+		//}
+	}
+	
+	void wstaw(String tabela, ContentValues wartosc) {
+		getWritableDatabase().insert(tabela, null, wartosc);
+	}
+	
+	ContentValues gry(int nr) {
+		ContentValues cv = new ContentValues();
+		cv.put("Kategoria", StanGry.kategoria);
+		cv.put("Czas", StanGry.wybor);
+		cv.put("Gracz", StanGry.nazwaUzytkownika);
+		cv.put("Wynik", StanGry.punkty);
+		cv.put("nr", nr);
+		cv.put("iloscPytan", StanGry.iloscPytan);
+		
+		return cv;
+	}
+	
+	void nieaktualnePytania(int nr) {
+		ContentValues cv = new ContentValues();
+		for(int i=0; i<15; ++i)
+		{
+			if(StanGry.nieaktualnePytania[i]==-1) {
+				break;
+			}
+			else
+			{
+				cv.clear();
+				cv.put("nr", StanGry.nieaktualnePytania[i]);
+				wstaw("zapis"+Integer.toString(nr), cv);
+			}
+		}
 	}
 
 }

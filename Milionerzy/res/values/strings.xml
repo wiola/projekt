@@ -25,5 +25,6 @@
     <string name="ok">OK</string>
     <string name="wroc">Wróć</string>
     <string name="title_activity_start_gry">StartGry</string>
+    <string name="gry">Wczytaj grę</string>
 
 </resources>
