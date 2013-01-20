@@ -105,7 +105,7 @@ public class StartGry extends Activity {
 				}
 			}
 		 
-		 //Log.e("CHUJ", Integer.toString(nr)+": "+Integer.toString(StanGry.pytania[nr].odpowiedzi[0].idPytania));
+		
 		 RadioButton rb1 = (RadioButton) findViewById(R.id.radioButton1);
 		 rb1.setText(tmp[0].odpowiedz);
 		 //rb1.setBackgroundColor(Color.MAGENTA);
@@ -347,10 +347,8 @@ public class StartGry extends Activity {
         switch(item.getItemId())
         {
             case MENU_ADD:
-            	zz.stopTimer(); //CZAS START
-            	//Toast.makeText(getApplicationContext(), "DUPA", Toast.LENGTH_LONG).show();
+            	zz.stopTimer(); 
             	
-            	////////////////////////TUTAJ WKLEJ ALERT
             	
             	AlertDialog.Builder tAlertu = new AlertDialog.Builder(context);
             	tAlertu.setTitle("Puza");
@@ -436,7 +434,6 @@ public class StartGry extends Activity {
             			String s = KolaRatunkowe.telefonDoPrzyjaciela(StanGry.aktualneOdpowiedzi);
 						AlertDialog.Builder tAlertu = new AlertDialog.Builder(context);
 					    tAlertu.setTitle("Przyjaciel mówi:");
-					    //coś tu trzeba dopisać...
 					    tAlertu.setMessage(s);
 					    
 					    tAlertu.setNegativeButton("Wróć", new DialogInterface.OnClickListener() {
@@ -569,7 +566,6 @@ public class StartGry extends Activity {
     						String s = KolaRatunkowe.telefonDoPrzyjaciela(StanGry.aktualneOdpowiedzi);
     						AlertDialog.Builder tAlertu = new AlertDialog.Builder(context);
     					    tAlertu.setTitle("Przyjaciel mówi:");
-    					    //coś tu trzeba dopisać...
     					    tAlertu.setMessage(s);
     					    
     					    tAlertu.setNegativeButton("Wróć", new DialogInterface.OnClickListener() {
@@ -746,7 +742,6 @@ public class StartGry extends Activity {
     						String s = KolaRatunkowe.telefonDoPrzyjaciela(StanGry.aktualneOdpowiedzi);
     						AlertDialog.Builder tAlertu = new AlertDialog.Builder(context);
     					    tAlertu.setTitle("Przyjaciel mówi:");
-    					    //coś tu trzeba dopisać...
     					    tAlertu.setMessage(s);
     					    
     					    tAlertu.setNegativeButton("Wróć", new DialogInterface.OnClickListener() {
@@ -970,7 +965,6 @@ public class StartGry extends Activity {
     						String s = KolaRatunkowe.telefonDoPrzyjaciela(StanGry.aktualneOdpowiedzi);
     						AlertDialog.Builder tAlertu = new AlertDialog.Builder(context);
     					    tAlertu.setTitle("Przyjaciel mówi:");
-    					    //coś tu trzeba dopisać...
     					    tAlertu.setMessage(s);
     					    
     					    tAlertu.setNegativeButton("Wróć", new DialogInterface.OnClickListener() {
