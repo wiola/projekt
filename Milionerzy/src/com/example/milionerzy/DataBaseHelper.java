@@ -155,39 +155,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 		cursor.close();
 		cursor2.close();
 		
-		/*Odp[] tmp = new Odp[4];
-		int k;
-		
-		for(int i=0; i<60; ++i) {
-			k=0;
-			for(int j=0; j<240; ++j)
-			{
-				//Log.e("CHUJ", Integer.toString(pytania[i]._id)+" "+Integer.toString(odp[j].idPytania));
-					if(pytania[i]._id==odp[j].idPytania)
-				{
-					tmp[k]=odp[j];
-					++k;
-					if(k==4)
-					{
-						break;
-					}
-				}
-			}
-			//Log.e("CHUJ", pytania[i].pytanie+" "+tmp[0].odpowiedz+" "+tmp[1].odpowiedz);
-			StanGry.pytania[i] = new PytaniaIOdpowiedzi(pytania[i], tmp);
-		}*/
+	
 	}
 	
 	void usun(String tabela, String kolumna, String warunek) {
 		//try {
 			//getWritableDatabase().delete(tabela, kolumna, warunek);
 		getWritableDatabase().execSQL("DELETE FROM "+tabela+" WHERE nr = "+ warunek);
-		//getWritableDatabase().rawQuery("DELETE FROM "+tabela+" WHERE nr = ", warunek);
-		//}
-		//catch(SQLiteException e)
-		//{
-		//	Log.e("CHUJ", "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
-		//}
+	
 	}
 	
 	void wstaw(String tabela, ContentValues wartosc) {
