@@ -162,7 +162,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 			k=0;
 			for(int j=0; j<240; ++j)
 			{
-				//Log.e("CHUJ", Integer.toString(pytania[i]._id)+" "+Integer.toString(odp[j].idPytania));
 					if(pytania[i]._id==odp[j].idPytania)
 				{
 					tmp[k]=odp[j];
@@ -173,7 +172,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 					}
 				}
 			}
-			//Log.e("CHUJ", pytania[i].pytanie+" "+tmp[0].odpowiedz+" "+tmp[1].odpowiedz);
 			StanGry.pytania[i] = new PytaniaIOdpowiedzi(pytania[i], tmp);
 		}*/
 	}
@@ -186,7 +184,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 		//}
 		//catch(SQLiteException e)
 		//{
-		//	Log.e("CHUJ", "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
+		//	
 		//}
 	}
 	
@@ -198,7 +196,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 		//}
 		//catch(SQLiteException e)
 		//{
-		//	Log.e("CHUJ", "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
+		//	
 		//}
 	}
 	
