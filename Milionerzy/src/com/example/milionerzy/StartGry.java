@@ -361,9 +361,9 @@ public class StartGry extends Activity {
         {
             case MENU_ADD:
             	zz.stopTimer(); //CZAS START
+            	//Toast.makeText(getApplicationContext(), "DUPA", Toast.LENGTH_LONG).show();
             	
-            	
-        
+            	////////////////////////TUTAJ WKLEJ ALERT
             	
             	AlertDialog.Builder tAlertu = new AlertDialog.Builder(context);
             	tAlertu.setTitle("Puza");
@@ -449,6 +449,7 @@ public class StartGry extends Activity {
             			String s = KolaRatunkowe.telefonDoPrzyjaciela(StanGry.aktualneOdpowiedzi);
 						AlertDialog.Builder tAlertu = new AlertDialog.Builder(context);
 					    tAlertu.setTitle("Przyjaciel mówi:");
+					    //coś tu trzeba dopisać...
 					    tAlertu.setMessage(s);
 					    
 					    tAlertu.setNegativeButton("Wróć", new DialogInterface.OnClickListener() {
@@ -581,6 +582,7 @@ public class StartGry extends Activity {
     						String s = KolaRatunkowe.telefonDoPrzyjaciela(StanGry.aktualneOdpowiedzi);
     						AlertDialog.Builder tAlertu = new AlertDialog.Builder(context);
     					    tAlertu.setTitle("Przyjaciel mówi:");
+    					    //coś tu trzeba dopisać...
     					    tAlertu.setMessage(s);
     					    
     					    tAlertu.setNegativeButton("Wróć", new DialogInterface.OnClickListener() {
@@ -757,6 +759,7 @@ public class StartGry extends Activity {
     						String s = KolaRatunkowe.telefonDoPrzyjaciela(StanGry.aktualneOdpowiedzi);
     						AlertDialog.Builder tAlertu = new AlertDialog.Builder(context);
     					    tAlertu.setTitle("Przyjaciel mówi:");
+    					    //coś tu trzeba dopisać...
     					    tAlertu.setMessage(s);
     					    
     					    tAlertu.setNegativeButton("Wróć", new DialogInterface.OnClickListener() {
@@ -980,6 +983,7 @@ public class StartGry extends Activity {
     						String s = KolaRatunkowe.telefonDoPrzyjaciela(StanGry.aktualneOdpowiedzi);
     						AlertDialog.Builder tAlertu = new AlertDialog.Builder(context);
     					    tAlertu.setTitle("Przyjaciel mówi:");
+    					    //coś tu trzeba dopisać...
     					    tAlertu.setMessage(s);
     					    
     					    tAlertu.setNegativeButton("Wróć", new DialogInterface.OnClickListener() {

@@ -186,7 +186,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 		//}
 		//catch(SQLiteException e)
 		//{
-		//
+		//	Log.e("CHUJ", "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
 		//}
 	}
 	
@@ -198,7 +198,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 		//}
 		//catch(SQLiteException e)
 		//{
-		//	
+		//	Log.e("CHUJ", "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
 		//}
 	}
 	
