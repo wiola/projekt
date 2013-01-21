@@ -57,6 +57,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.milionerzy.Milionerzy" />
         </activity>
+        <activity
+            android:name="com.example.milionerzy.NajlepszeWyniki"
+            android:label="@string/title_activity_najlepsze_wyniki" >
+        </activity>
+        <activity
+            android:name="com.example.milionerzy.ZapisaneGry"
+            android:label="@string/title_activity_zapisane_gry" >
+        </activity>
     </application>
 
 </manifest>

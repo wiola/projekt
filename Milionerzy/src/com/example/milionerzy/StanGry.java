@@ -20,6 +20,7 @@ class StanGry {
 	public final static String[] KolaRatunkowe = {"Telefon do przyjaciela", "Pytanie do publiczności", "50/50" };
 	public static Odp[] aktualneOdpowiedzi;
 	public static boolean wykorzystaneKola[] = new boolean[3];
+	public static int[] tablicaPytan;
 	
 	public static int[] wybierzPytaniaZKategori(int id)
 	{

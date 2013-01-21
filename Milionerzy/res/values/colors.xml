@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="btn_text_selected">#99CCFF</color>
+    <color name="btn_text_normal">#FFF</color>
+    <color name="btn_text_disabled">#777</color>
+</resources>

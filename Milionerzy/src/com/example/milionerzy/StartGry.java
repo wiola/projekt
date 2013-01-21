@@ -14,6 +14,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,6 +30,7 @@ public class StartGry extends Activity {
 	
 	final int PRAWIDLOWA = 5;
 	final int NIEPRAWIDLOWA = 0;
+	final String pauza = "               ";
 	
 	DataBaseHelper pomocnik;
 
@@ -75,6 +77,8 @@ public class StartGry extends Activity {
 		 } while (Pomocnicza.sprawdz(nr));
 		 StanGry.nr = nr;
 		 
+		 StanGry.nieaktualnePytania[StanGry.iloscPytan]=nr;
+		 
 		 pytanie.setText(StanGry.pytania[nr].pytanie);
 		 
 		 final RadioGroup odpowiedzi = (RadioGroup) findViewById(R.id.odpowiedzi);
@@ -105,16 +109,18 @@ public class StartGry extends Activity {
 				}
 			}
 		 
-		 //Log.e("CHUJ", Integer.toString(nr)+": "+Integer.toString(StanGry.pytania[nr].odpowiedzi[0].idPytania));
 		 RadioButton rb1 = (RadioButton) findViewById(R.id.radioButton1);
-		 rb1.setText(tmp[0].odpowiedz);
-		 //rb1.setBackgroundColor(Color.MAGENTA);
+		 rb1.setText(pauza + tmp[0].odpowiedz);
+		 rb1.setBackgroundResource(R.drawable.odp);
 		 RadioButton rb2 = (RadioButton) findViewById(R.id.radioButton2);
-		 rb2.setText(tmp[1].odpowiedz);
+		 rb2.setText(pauza + tmp[1].odpowiedz);
+		 rb2.setBackgroundResource(R.drawable.odp);
 		 RadioButton rb3 = (RadioButton) findViewById(R.id.radioButton3);
-		 rb3.setText(tmp[2].odpowiedz);
+		 rb3.setText(pauza + tmp[2].odpowiedz);
+		 rb3.setBackgroundResource(R.drawable.odp);
 		 RadioButton rb4 = (RadioButton) findViewById(R.id.radioButton4);
-		 rb4.setText(tmp[3].odpowiedz);
+		 rb4.setText(pauza + tmp[3].odpowiedz);
+		 rb4.setBackgroundResource(R.drawable.odp);
 		 
 		 rb1.setSelected(true);
 			Button button1 = (Button) findViewById(R.id.button1);
@@ -144,8 +150,7 @@ public class StartGry extends Activity {
 					int selectedId = odpowiedzi.getCheckedRadioButtonId();
 		 
 					RadioButton rb = (RadioButton) findViewById(selectedId);
-					//if((rb.getText().toString()).compareTo(PytaniaIOdpowiedzi.poprawna(StanGry.nr))==0)
-					if((rb.getText().toString()).compareTo(StanGry.prawidlowa)==0)
+					if((rb.getText().toString()).compareTo(pauza+StanGry.prawidlowa)==0)
 					{
 						++StanGry.iloscPytan;
 						rb.setBackgroundColor(Color.GREEN);
@@ -211,10 +216,13 @@ public class StartGry extends Activity {
 														    
 														    @Override
 															public void onClick(DialogInterface dialog, int id) {
+														    	++StanGry.slot;
 															myDbHelper.usun("Gry", "nr", Integer.toString(StanGry.slot));
-															myDbHelper.usun("zapis"+Integer.toString(StanGry.nr), "1", null);
+															//myDbHelper.usun("zapis"+Integer.toString(StanGry.slot), "1", "*");
+															myDbHelper.usun("zapis"+Integer.toString(StanGry.slot));
 															myDbHelper.wstaw("Gry", myDbHelper.gry(StanGry.slot));
 															myDbHelper.nieaktualnePytania(StanGry.slot);
+														    	//Toast.makeText(getApplicationContext(), Integer.toString(StanGry.slot), Toast.LENGTH_LONG).show();
 															}
 														});
 													    
@@ -280,11 +288,13 @@ public class StartGry extends Activity {
 						RadioButton[] rbp = {(RadioButton) findViewById(R.id.radioButton1), (RadioButton) findViewById(R.id.radioButton2), (RadioButton) findViewById(R.id.radioButton3), (RadioButton) findViewById(R.id.radioButton4)};
 						for(int i=0; i<4; ++i)
 						{
-							if((rbp[i].getText().toString()).compareTo(StanGry.prawidlowa)==0) {
+							if((rbp[i].getText().toString()).compareTo(pauza+StanGry.prawidlowa)==0) {
 								rbp[i].setBackgroundColor(Color.GREEN);
 							}
 						}
-						
+						new Handler().postDelayed(new Runnable() {
+							@Override
+							public void run() {
 						AlertDialog.Builder tAlertu = new AlertDialog.Builder(context);
 					    
 						tAlertu.setTitle("To niestety nieprawidłowa odpowiedź :(");
@@ -319,6 +329,9 @@ public class StartGry extends Activity {
 
 					    AlertDialog alert = tAlertu.create();
 					    alert.show();
+							}
+							}, 3000);
+					    //////////////////
 					}
 				}
 		 
@@ -337,7 +350,7 @@ public class StartGry extends Activity {
 	    super.onCreateOptionsMenu(menu);
 
 	    menu.add(Menu.NONE, MENU_ADD, Menu.NONE, "Pauza");
-	    menu.add(Menu.NONE, MENU_DELETE, Menu.NONE, "Delete");
+	    menu.add(Menu.NONE, MENU_DELETE, Menu.NONE, "Koła Ratunkowe");
 	    return true;
 	}
 
@@ -348,9 +361,9 @@ public class StartGry extends Activity {
         {
             case MENU_ADD:
             	zz.stopTimer(); //CZAS START
-            	//Toast.makeText(getApplicationContext(), "DUPA", Toast.LENGTH_LONG).show();
             	
-            	////////////////////////TUTAJ WKLEJ ALERT
+            	
+        
             	
             	AlertDialog.Builder tAlertu = new AlertDialog.Builder(context);
             	tAlertu.setTitle("Puza");
@@ -436,7 +449,6 @@ public class StartGry extends Activity {
             			String s = KolaRatunkowe.telefonDoPrzyjaciela(StanGry.aktualneOdpowiedzi);
 						AlertDialog.Builder tAlertu = new AlertDialog.Builder(context);
 					    tAlertu.setTitle("Przyjaciel mówi:");
-					    //coś tu trzeba dopisać...
 					    tAlertu.setMessage(s);
 					    
 					    tAlertu.setNegativeButton("Wróć", new DialogInterface.OnClickListener() {
@@ -569,7 +581,6 @@ public class StartGry extends Activity {
     						String s = KolaRatunkowe.telefonDoPrzyjaciela(StanGry.aktualneOdpowiedzi);
     						AlertDialog.Builder tAlertu = new AlertDialog.Builder(context);
     					    tAlertu.setTitle("Przyjaciel mówi:");
-    					    //coś tu trzeba dopisać...
     					    tAlertu.setMessage(s);
     					    
     					    tAlertu.setNegativeButton("Wróć", new DialogInterface.OnClickListener() {
@@ -746,7 +757,6 @@ public class StartGry extends Activity {
     						String s = KolaRatunkowe.telefonDoPrzyjaciela(StanGry.aktualneOdpowiedzi);
     						AlertDialog.Builder tAlertu = new AlertDialog.Builder(context);
     					    tAlertu.setTitle("Przyjaciel mówi:");
-    					    //coś tu trzeba dopisać...
     					    tAlertu.setMessage(s);
     					    
     					    tAlertu.setNegativeButton("Wróć", new DialogInterface.OnClickListener() {
@@ -970,7 +980,6 @@ public class StartGry extends Activity {
     						String s = KolaRatunkowe.telefonDoPrzyjaciela(StanGry.aktualneOdpowiedzi);
     						AlertDialog.Builder tAlertu = new AlertDialog.Builder(context);
     					    tAlertu.setTitle("Przyjaciel mówi:");
-    					    //coś tu trzeba dopisać...
     					    tAlertu.setMessage(s);
     					    
     					    tAlertu.setNegativeButton("Wróć", new DialogInterface.OnClickListener() {

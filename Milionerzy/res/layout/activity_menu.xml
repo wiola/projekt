@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/cosss"
     tools:context=".Menu" >
 
     <Button
@@ -11,6 +12,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="45dp"
+        android:background="@drawable/przycisk"
+        android:textColor="@android:color/white"
         android:text="@string/zacznij_gre" />
 
     <Button
@@ -20,6 +23,8 @@
         android:layout_alignLeft="@+id/button1"
         android:layout_below="@+id/button1"
         android:layout_marginTop="28dp"
+        android:background="@drawable/przycisk"
+        android:textColor="@android:color/white"
         android:text="@string/pomoc" />
 
     <Button
@@ -29,7 +34,9 @@
         android:layout_alignRight="@+id/button2"
         android:layout_centerVertical="true"
         android:layout_marginTop="28dp"
-        android:text="@string/info" />
+        android:background="@drawable/przycisk"
+        android:textColor="@android:color/white"
+        android:text="@string/info"/>
     
 
 
@@ -40,6 +47,8 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="56dp"
+        android:background="@drawable/wyjscie"
+        android:textColor="@android:color/white"
         android:text="@string/wyjscie" />
 
     <Button
@@ -48,7 +57,9 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/button4"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="32dp"
-        android:text="@string/gry" />
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/zapisane"
+        android:text="@string/gry"
+        android:textColor="@android:color/white" />
 
 </RelativeLayout>

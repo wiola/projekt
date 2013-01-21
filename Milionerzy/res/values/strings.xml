@@ -26,5 +26,7 @@
     <string name="wroc">Wróć</string>
     <string name="title_activity_start_gry">StartGry</string>
     <string name="gry">Wczytaj grę</string>
+    <string name="title_activity_najlepsze_wyniki">Najlepsze Wyniki</string>
+    <string name="title_activity_zapisane_gry">Zapisane Gry</string>
 
 </resources>

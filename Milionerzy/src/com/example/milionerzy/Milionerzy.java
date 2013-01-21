@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.database.SQLException;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -226,13 +227,43 @@ public class Milionerzy extends Activity {
 		    alert.show();
 		}
 	    });
+	
+	Button button5 = (Button) findViewById(R.id.button5);
+	button5.setOnClickListener(new OnClickListener() {
+		
+		@Override
+		    public void onClick(View arg0) {
+		    final Intent mainIntent = new Intent(Milionerzy.this, ZapisaneGry.class);
+		    Milionerzy.this.startActivity(mainIntent);
+		}
+	    });
     }
     
     
-    @Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+    public static final int MENU_ADD = Menu.FIRST;
+	public static final int MENU_DELETE = Menu.FIRST + 1;
 	
-    	getMenuInflater().inflate(R.menu.activity_menu, menu);
-	return true;
+	final Context context = this;
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    super.onCreateOptionsMenu(menu);
+
+	    menu.add(Menu.NONE, MENU_ADD, Menu.NONE, "Najlepsze Wyniki");
+	    return true;
+	}
+
+	@Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch(item.getItemId())
+        {
+        	case MENU_ADD:
+        		final Intent mainIntent = new Intent(Milionerzy.this, NajlepszeWyniki.class);
+    		    Milionerzy.this.startActivity(mainIntent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

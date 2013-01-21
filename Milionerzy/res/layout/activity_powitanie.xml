@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/cosss"
     tools:context=".Powitanie" >
 
     <TextView
@@ -11,6 +12,7 @@
         android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="14dp"
+        android:textColor="@android:color/white"
         android:text="@string/powitanie1"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="40sp" />
@@ -23,6 +25,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="78dp"
         android:layout_marginLeft="70dp"
+        android:textColor="@android:color/white"
         android:text="@string/powitanie2"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="15sp" />
@@ -34,6 +37,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="52dp"
+        android:textColor="@android:color/white"
         android:text="@string/powitanie"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="30sp"
@@ -42,7 +46,7 @@
     <ProgressBar
         android:id="@+id/progressBar1"
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="50dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"

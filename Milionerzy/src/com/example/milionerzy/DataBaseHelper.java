@@ -186,7 +186,19 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 		//}
 		//catch(SQLiteException e)
 		//{
-		//	Log.e("CHUJ", "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
+		//
+		//}
+	}
+	
+	void usun(String tabela) {
+		//try {
+			//getWritableDatabase().delete(tabela, kolumna, warunek);
+		getWritableDatabase().delete(tabela, null, null);
+		//getWritableDatabase().rawQuery("DELETE FROM "+tabela+" WHERE nr = ", warunek);
+		//}
+		//catch(SQLiteException e)
+		//{
+		//	
 		//}
 	}
 	
@@ -202,6 +214,30 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 		cv.put("Wynik", StanGry.punkty);
 		cv.put("nr", nr);
 		cv.put("iloscPytan", StanGry.iloscPytan);
+		if(StanGry.wykorzystaneKola[0]==false)
+		{
+			cv.put("Przyjaciel", 0);
+		}
+		else
+		{
+			cv.put("Przyjaciel", 1);
+		}
+		if(StanGry.wykorzystaneKola[1]==false)
+		{
+			cv.put("Publicznosc", 0);
+		}
+		else
+		{
+			cv.put("Publicznosc", 1);
+		}
+		if(StanGry.wykorzystaneKola[2]==false)
+		{
+			cv.put("P50", 0);
+		}
+		else
+		{
+			cv.put("P50", 1);
+		}
 		
 		return cv;
 	}
@@ -221,5 +257,58 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 			}
 		}
 	}
+	
+void wczytaj(int nr) {
+		
+		
+		Cursor cursor = getReadableDatabase().rawQuery(
+				"SELECT * FROM Gry WHERE nr=?", new String[] {Integer.toString(nr)});
+		cursor.moveToNext();
+		Log.e("CHUJ", Integer.toString(nr));
+		StanGry.iloscPytan=cursor.getInt(cursor.getColumnIndex("iloscPytan"));
+		StanGry.kategoria=cursor.getInt(cursor.getColumnIndex("Kategoria"));
+		StanGry.wybor=cursor.getInt(cursor.getColumnIndex("Czas"));
+		StanGry.nazwaUzytkownika=cursor.getString(cursor.getColumnIndex("Gracz"));
+		StanGry.punkty=cursor.getInt(cursor.getColumnIndex("Wynik"));
+		if(cursor.getInt(cursor.getColumnIndex("Przyjaciel"))==0)
+		{
+			StanGry.wykorzystaneKola[0]=false;
+		}
+		else
+		{
+			StanGry.wykorzystaneKola[0]=true;
+		}
+		if(cursor.getInt(cursor.getColumnIndex("Publicznosc"))==0)
+		{
+			StanGry.wykorzystaneKola[1]=false;
+		}
+		else
+		{
+			StanGry.wykorzystaneKola[1]=true;
+		}
+		if(cursor.getInt(cursor.getColumnIndex("P50"))==0)
+		{
+			StanGry.wykorzystaneKola[2]=false;
+		}
+		else
+		{
+			StanGry.wykorzystaneKola[2]=true;
+		}
+		
+}
+
+String[][] wczytajNajlepszeWyniki() {
+	Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM Scores", null);
+	
+	String[][] wynik = new String[3][2];
+	for(int i=0; i<3; ++i)
+	{
+		cursor.moveToNext();
+		wynik[i][0]=cursor.getString(cursor.getColumnIndex("NazwaUzytkownika"));
+		wynik[i][1]=cursor.getString(cursor.getColumnIndex("Wynik"));
+	}
+	
+	return wynik;
+}
 
 }
