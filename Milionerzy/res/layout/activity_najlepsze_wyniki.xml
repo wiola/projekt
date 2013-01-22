@@ -2,26 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/pomoc"
     tools:context=".NajlepszeWyniki" >
-
-    <TextView
-        android:id="@+id/wynik2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_centerVertical="true"
-        android:text="Medium Text"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/wynik3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView3"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="48dp"
-        android:text="Small Text"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <Button
         android:id="@+id/najlepszeb"
@@ -33,6 +15,7 @@
         android:text="@string/wroc" />
 
     <TextView
+        android:textColor="@android:color/white"
         android:id="@+id/wynikiTytul"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -44,13 +27,36 @@
         android:textSize="30sp" />
 
     <TextView
+        android:textColor="@android:color/white"
+        android:id="@+id/wynik2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/wynik1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="46dp"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:textColor="@android:color/white"
         android:id="@+id/wynik1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/textView3"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="47dp"
+        android:layout_alignLeft="@+id/wynik2"
+        android:layout_below="@+id/wynikiTytul"
+        android:layout_marginTop="57dp"
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:textColor="@android:color/white"
+        android:id="@+id/wynik3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/wynik2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="Small Text"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </RelativeLayout>

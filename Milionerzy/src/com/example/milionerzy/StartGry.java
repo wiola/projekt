@@ -5,17 +5,12 @@ import java.util.Random;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,7 +19,6 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class StartGry extends Activity {
 	
@@ -55,14 +49,6 @@ public class StartGry extends Activity {
 			  
 			 }
 
-		 try {
-		  
-			 SQLiteDatabase baza = myDbHelper.zwroc();
-		  
-		 }catch(SQLException sqle){
-		  
-		 throw sqle;
-		 }
 		 
 		 
 		 
@@ -174,7 +160,8 @@ public class StartGry extends Activity {
 							StanGry.punkty+=PRAWIDLOWA;
 						}
 						
-						
+						if(StanGry.iloscPytan!=15)
+						{
 						AlertDialog.Builder tAlertu = new AlertDialog.Builder(context);
 					    
 						tAlertu.setTitle("Brawo!\nTo poprawna odpowiedź :)");
@@ -217,12 +204,10 @@ public class StartGry extends Activity {
 														    @Override
 															public void onClick(DialogInterface dialog, int id) {
 														    	++StanGry.slot;
-															myDbHelper.usun("Gry", "nr", Integer.toString(StanGry.slot));
-															//myDbHelper.usun("zapis"+Integer.toString(StanGry.slot), "1", "*");
+														    	myDbHelper.update("Gry", myDbHelper.gry(StanGry.slot), Integer.toString(StanGry.slot));
 															myDbHelper.usun("zapis"+Integer.toString(StanGry.slot));
-															myDbHelper.wstaw("Gry", myDbHelper.gry(StanGry.slot));
 															myDbHelper.nieaktualnePytania(StanGry.slot);
-														    	//Toast.makeText(getApplicationContext(), Integer.toString(StanGry.slot), Toast.LENGTH_LONG).show();
+															StartGry.this.finish();
 															}
 														});
 													    
@@ -255,7 +240,9 @@ public class StartGry extends Activity {
 														@Override
 														public void onClick(DialogInterface dialog, int id) {
 														dialog.cancel();
-														StartGry.this.finish();
+														final Intent mainIntent = new Intent(StartGry.this, KoniecGry.class);
+										    		    StartGry.this.startActivity(mainIntent);
+										    		    StartGry.this.finish();
 													}
 													
 														
@@ -276,6 +263,13 @@ public class StartGry extends Activity {
 					    
 					    AlertDialog alert = tAlertu.create();
 					    alert.show();
+						}
+						else
+						{
+							final Intent mainIntent = new Intent(StartGry.this, KoniecGry.class);
+			    		    StartGry.this.startActivity(mainIntent);
+			    		    StartGry.this.finish();
+						}
 					}
 					
 					
@@ -331,7 +325,6 @@ public class StartGry extends Activity {
 					    alert.show();
 							}
 							}, 3000);
-					    //////////////////
 					}
 				}
 		 
@@ -340,8 +333,8 @@ public class StartGry extends Activity {
 
 	}
 
-	public static final int MENU_ADD = Menu.FIRST;
-	public static final int MENU_DELETE = Menu.FIRST + 1;
+	public static final int MENU_PAUZA = Menu.FIRST;
+	public static final int MENU_KOLA = Menu.FIRST + 1;
 	
 	final Context context = this;
 
@@ -349,8 +342,8 @@ public class StartGry extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 	    super.onCreateOptionsMenu(menu);
 
-	    menu.add(Menu.NONE, MENU_ADD, Menu.NONE, "Pauza");
-	    menu.add(Menu.NONE, MENU_DELETE, Menu.NONE, "Koła Ratunkowe");
+	    menu.add(Menu.NONE, MENU_PAUZA, Menu.NONE, "Pauza");
+	    menu.add(Menu.NONE, MENU_KOLA, Menu.NONE, "Koła Ratunkowe");
 	    return true;
 	}
 
@@ -359,11 +352,9 @@ public class StartGry extends Activity {
     {
         switch(item.getItemId())
         {
-            case MENU_ADD:
-            	zz.stopTimer(); //CZAS START
-            	//Toast.makeText(getApplicationContext(), "DUPA", Toast.LENGTH_LONG).show();
-            	
-            	////////////////////////TUTAJ WKLEJ ALERT
+            case MENU_PAUZA:
+            	zz.stopTimer();
+
             	
             	AlertDialog.Builder tAlertu = new AlertDialog.Builder(context);
             	tAlertu.setTitle("Puza");
@@ -382,12 +373,8 @@ public class StartGry extends Activity {
 				AlertDialog alert = tAlertu.create();
 			    alert.show();
 
-        
-
-            	
-            	/////////////////////////KONIEC ALERTU
             return true;
-        case MENU_DELETE:
+        case MENU_KOLA:
         	int wspolczynnnikKol=0;
         	
         	if(StanGry.wykorzystaneKola[0]==false)
@@ -449,7 +436,6 @@ public class StartGry extends Activity {
             			String s = KolaRatunkowe.telefonDoPrzyjaciela(StanGry.aktualneOdpowiedzi);
 						AlertDialog.Builder tAlertu = new AlertDialog.Builder(context);
 					    tAlertu.setTitle("Przyjaciel mówi:");
-					    //coś tu trzeba dopisać...
 					    tAlertu.setMessage(s);
 					    
 					    tAlertu.setNegativeButton("Wróć", new DialogInterface.OnClickListener() {
@@ -582,7 +568,6 @@ public class StartGry extends Activity {
     						String s = KolaRatunkowe.telefonDoPrzyjaciela(StanGry.aktualneOdpowiedzi);
     						AlertDialog.Builder tAlertu = new AlertDialog.Builder(context);
     					    tAlertu.setTitle("Przyjaciel mówi:");
-    					    //coś tu trzeba dopisać...
     					    tAlertu.setMessage(s);
     					    
     					    tAlertu.setNegativeButton("Wróć", new DialogInterface.OnClickListener() {
@@ -759,7 +744,6 @@ public class StartGry extends Activity {
     						String s = KolaRatunkowe.telefonDoPrzyjaciela(StanGry.aktualneOdpowiedzi);
     						AlertDialog.Builder tAlertu = new AlertDialog.Builder(context);
     					    tAlertu.setTitle("Przyjaciel mówi:");
-    					    //coś tu trzeba dopisać...
     					    tAlertu.setMessage(s);
     					    
     					    tAlertu.setNegativeButton("Wróć", new DialogInterface.OnClickListener() {
@@ -983,7 +967,6 @@ public class StartGry extends Activity {
     						String s = KolaRatunkowe.telefonDoPrzyjaciela(StanGry.aktualneOdpowiedzi);
     						AlertDialog.Builder tAlertu = new AlertDialog.Builder(context);
     					    tAlertu.setTitle("Przyjaciel mówi:");
-    					    //coś tu trzeba dopisać...
     					    tAlertu.setMessage(s);
     					    
     					    tAlertu.setNegativeButton("Wróć", new DialogInterface.OnClickListener() {
@@ -1123,10 +1106,7 @@ public class StartGry extends Activity {
     		    break;
         	
         	}
-        
-
-        	
-        	/////////////////////KONIEC 
+   
             return true;
         default:
             return super.onOptionsItemSelected(item);

@@ -10,7 +10,6 @@ class StanGry {
 	public static Pyt[] pytania = new Pyt[60];
 	public static Odp[] odp = new Odp[240];
 	public static int punkty = 0;
-	//public static PytaniaIOdpowiedzi[] pytania = new PytaniaIOdpowiedzi[60];
 	public static int nr;
 	public static String prawidlowa;
 	public static int iloscPytan = 0;
@@ -40,10 +39,6 @@ class StanGry {
 		}
 		
 		return wynik;
-	}
-	
-	public static PytaniaIOdpowiedzi zwrocPytanie(PytaniaIOdpowiedzi[] p, int nr) {
-		return p[nr];
 	}
 	
 	public static void zeruj() {

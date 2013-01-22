@@ -2,9 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/pomoc"
     tools:context=".ZapisaneGry" >
 
     <TextView
+        android:textColor="@android:color/white"
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,13 +26,13 @@
         android:layout_centerVertical="true" >
 
         <RadioButton
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:id="@+id/wczytaj1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="32dp"
-            android:text="DUPA"
+            android:text="@string/zapis1"
             android:checked="true" />
 
         <RadioButton
@@ -39,7 +41,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="32dp" />
+            android:layout_marginTop="32dp"
+            android:text="@string/zapis2" />
 
         <RadioButton
             android:textColor="@android:color/white"
@@ -47,7 +50,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="32dp" />
+            android:layout_marginTop="32dp"
+            android:text="@string/zapis3" />
 	</RadioGroup>
 
     <Button

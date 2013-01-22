@@ -15,11 +15,8 @@ public class Zegar {
 
 	public void startTimer()
 	{
-	  //if (secondsPassed == 0) 
-	  //{
 	    timer.removeCallbacks(updateTimeElasped);
 	    timer.postDelayed(updateTimeElasped, 1000);
-	  //}
 	}
 
 	public void stopTimer()

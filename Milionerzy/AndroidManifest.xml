@@ -65,6 +65,10 @@
             android:name="com.example.milionerzy.ZapisaneGry"
             android:label="@string/title_activity_zapisane_gry" >
         </activity>
+        <activity
+            android:name="com.example.milionerzy.KoniecGry"
+            android:label="@string/title_activity_koniec_gry" >
+        </activity>
     </application>
 
 </manifest>

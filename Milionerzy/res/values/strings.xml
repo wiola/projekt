@@ -28,5 +28,11 @@
     <string name="gry">Wczytaj grę</string>
     <string name="title_activity_najlepsze_wyniki">Najlepsze Wyniki</string>
     <string name="title_activity_zapisane_gry">Zapisane Gry</string>
+    <string name="title_activity_koniec_gry">Koniec Gry</string>
+    <string name="wygrales">Wygrałeś: </string>
+    <string name="koniec">Koniec</string>
+    <string name="zapis1">Zapis 1</string>
+    <string name="zapis2">Zapis 2</string>
+    <string name="zapis3">Zapis 3</string>
 
 </resources>

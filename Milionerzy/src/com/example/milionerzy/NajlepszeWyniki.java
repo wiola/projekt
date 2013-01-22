@@ -4,10 +4,6 @@ import java.io.IOException;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.content.Intent;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -32,14 +28,6 @@ public class NajlepszeWyniki extends Activity {
 			  
 			 }
 
-		 try {
-		  
-			 SQLiteDatabase baza = myDbHelper.zwroc();
-		  
-		 }catch(SQLException sqle){
-		  
-		 throw sqle;
-		 }
 		 
 		 TextView wynik1 = (TextView) findViewById(R.id.wynik1);
 		 TextView wynik2 = (TextView) findViewById(R.id.wynik2);
@@ -61,12 +49,4 @@ public class NajlepszeWyniki extends Activity {
 				}
 			    });
 		}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_najlepsze_wyniki, menu);
-		return true;
-	}
-
 }

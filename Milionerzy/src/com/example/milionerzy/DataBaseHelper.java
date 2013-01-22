@@ -4,7 +4,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Random;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -13,10 +12,6 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.provider.SyncStateContract.Columns;
-import android.util.Log;
-import android.widget.RadioButton;
-import android.widget.Toast;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
 
@@ -140,9 +135,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 				"SELECT *, _id FROM Pytania", null);
 		Cursor cursor2 = getReadableDatabase().rawQuery(
 				"SELECT *, _id FROM Odpowiedzi", null);
-		
-		//Pyt[] pytania = new Pyt[60];
-		//Odp[] odp = new Odp[240];
+
 		
 		for (int i = 0; cursor.moveToNext(); ++i) {
 			StanGry.pytania[i] = new Pyt(cursor.getString(cursor.getColumnIndex("idPytanie")), cursor.getInt(cursor.getColumnIndex("IDKategori")), cursor.getString(cursor.getColumnIndex("Pytanie")));
@@ -155,49 +148,19 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 		cursor.close();
 		cursor2.close();
 		
-		/*Odp[] tmp = new Odp[4];
-		int k;
-		
-		for(int i=0; i<60; ++i) {
-			k=0;
-			for(int j=0; j<240; ++j)
-			{
-					if(pytania[i]._id==odp[j].idPytania)
-				{
-					tmp[k]=odp[j];
-					++k;
-					if(k==4)
-					{
-						break;
-					}
-				}
-			}
-			StanGry.pytania[i] = new PytaniaIOdpowiedzi(pytania[i], tmp);
-		}*/
+
 	}
 	
 	void usun(String tabela, String kolumna, String warunek) {
-		//try {
-			//getWritableDatabase().delete(tabela, kolumna, warunek);
-		getWritableDatabase().execSQL("DELETE FROM "+tabela+" WHERE nr = "+ warunek);
-		//getWritableDatabase().rawQuery("DELETE FROM "+tabela+" WHERE nr = ", warunek);
-		//}
-		//catch(SQLiteException e)
-		//{
-		//	
-		//}
+			getWritableDatabase().delete(tabela, "nr=?", new String[] {warunek});
+
+
 	}
 	
 	void usun(String tabela) {
-		//try {
-			//getWritableDatabase().delete(tabela, kolumna, warunek);
+
 		getWritableDatabase().delete(tabela, null, null);
-		//getWritableDatabase().rawQuery("DELETE FROM "+tabela+" WHERE nr = ", warunek);
-		//}
-		//catch(SQLiteException e)
-		//{
-		//	
-		//}
+
 	}
 	
 	void wstaw(String tabela, ContentValues wartosc) {
@@ -262,7 +225,6 @@ void wczytaj(int nr) {
 		Cursor cursor = getReadableDatabase().rawQuery(
 				"SELECT * FROM Gry WHERE nr=?", new String[] {Integer.toString(nr)});
 		cursor.moveToNext();
-		Log.e("CHUJ", Integer.toString(nr));
 		StanGry.iloscPytan=cursor.getInt(cursor.getColumnIndex("iloscPytan"));
 		StanGry.kategoria=cursor.getInt(cursor.getColumnIndex("Kategoria"));
 		StanGry.wybor=cursor.getInt(cursor.getColumnIndex("Czas"));
@@ -307,6 +269,22 @@ String[][] wczytajNajlepszeWyniki() {
 	}
 	
 	return wynik;
+}
+
+void update(String tabela, ContentValues cv, String warunek) {
+	getWritableDatabase().update(tabela, cv, "nr=?", new String[] {warunek});
+}
+
+void najlepsze(Wyniki[] w) {
+	ContentValues cv = new ContentValues();
+	
+	for(int i=0; i<3; ++i)
+	{
+		cv.clear();
+		cv.put("NazwaUzytkownika", w[i].nick);
+		cv.put("Wynik", w[i].pkt);
+		wstaw("Scores", cv);
+	}
 }
 
 }
